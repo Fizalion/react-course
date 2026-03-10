@@ -18,7 +18,7 @@ const Restaurant = ({ restaurant }) => {
         </>
       )}
 
-      {restaurant.reviews && restaurant.reviews.length > 0 && (
+      {restaurant.menu?.length > 0 && (
         <>
           <h3>Отзывы</h3>
           <ul>
