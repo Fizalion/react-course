@@ -1,9 +1,14 @@
+import ScrollProgress from "../ScrollProgress/ScrollProgress";
+
 const Layout = ({ children }) => {
   return (
     <main>
-      <header>Header</header>
-      {children}
-      <footer>Footer</footer>
+      <ScrollProgress />
+      <div className="container">
+        <header>Header</header>
+        {children}
+        <footer>Footer</footer>
+      </div>
     </main>
   );
 };

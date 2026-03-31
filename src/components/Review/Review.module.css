@@ -1,0 +1,13 @@
+.review {
+  margin-bottom: 10px;
+  max-width: 500px;
+}
+
+.text {
+  margin-bottom: 4px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #6b7a40;
+}
