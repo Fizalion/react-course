@@ -1,0 +1,9 @@
+.dish {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.name {
+  min-width: 180px;
+}

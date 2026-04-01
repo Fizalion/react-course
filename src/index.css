@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f6f1e8;
+  color: #2f241f;
+  font-family: Georgia, serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  padding: 8px 14px;
+  border: 1px solid #c9b8a6;
+  border-radius: 10px;
+  background: #fffaf3;
+  color: #2f241f;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f1e3d3;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border: 1px solid #c9b8a6;
+  border-radius: 10px;
+  background: #fffaf3;
+  color: #2f241f;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
