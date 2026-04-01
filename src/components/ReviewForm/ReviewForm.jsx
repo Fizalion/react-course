@@ -1,68 +1,17 @@
-import { useReducer } from "react";
-import Counter from "../Counter/Counter";
+import { useReviewForm } from "./useReviewForm";
+import { Counter } from "../Counter/Counter";
+
 import styles from "./ReviewForm.module.css";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "SET_NAME":
-      return { ...state, name: action.payload };
-    case "SET_TEXT":
-      return { ...state, text: action.payload };
-    case "SET_RATING":
-      return { ...state, rating: action.payload };
-    case "RESET_FORM":
-      return initialState;
-    default:
-      return state;
-  }
-}
-
-const initialState = {
-  name: "",
-  text: "",
-  rating: 1,
-};
-
 const ReviewForm = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  function handleNameChange(e) {
-    dispatch({
-      type: "SET_NAME",
-      payload: e.target.value,
-    });
-  }
-
-  function handleTextChange(e) {
-    dispatch({
-      type: "SET_TEXT",
-      payload: e.target.value,
-    });
-  }
-
-  function handleIncrementRating() {
-    if (state.rating === 5) return;
-
-    dispatch({
-      type: "SET_RATING",
-      payload: state.rating + 1,
-    });
-  }
-
-  function handleDecrementRating() {
-    if (state.rating === 1) return;
-
-    dispatch({
-      type: "SET_RATING",
-      payload: state.rating - 1,
-    });
-  }
-
-  function handleClear() {
-    dispatch({
-      type: "RESET_FORM",
-    });
-  }
+  const {
+    state,
+    handleNameChange,
+    handleTextChange,
+    handleIncrementRating,
+    handleDecrementRating,
+    handleClear,
+  } = useReviewForm();
 
   return (
     <div className={styles.form}>

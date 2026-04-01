@@ -3,15 +3,19 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import Dish from "../Dish/Dish";
 
 const Restaurant = ({ restaurant }) => {
+  const name = restaurant.name;
+  const menu = restaurant.menu;
+  const reviews = restaurant.reviews || [];
+
   return (
     <section>
-      <h2>{restaurant.name}</h2>
+      <h2>{name}</h2>
 
-      {restaurant.menu?.length > 0 && (
+      {menu?.length > 0 && (
         <>
           <h3>Меню</h3>
           <ul>
-            {restaurant.menu.map((dish) => (
+            {menu.map((dish) => (
               <li key={dish.id}>
                 <Dish dish={dish} />
               </li>
@@ -20,20 +24,19 @@ const Restaurant = ({ restaurant }) => {
         </>
       )}
 
-      <>
-        <h3>Отзывы</h3>
-        {restaurant.reviews?.length === 0 && <div>Нет отзывов</div>}
-        {restaurant.reviews?.length > 0 && (
-          <ul>
-            {restaurant.reviews.map((review) => (
-              <li key={review.id}>
-                <Review review={review} />
-              </li>
-            ))}
-          </ul>
-        )}
-        <ReviewForm />
-      </>
+      <h3>Отзывы</h3>
+      {reviews.length === 0 ? (
+        <div>Нет отзывов</div>
+      ) : (
+        <ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <Review review={review} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <ReviewForm />
     </section>
   );
 };
