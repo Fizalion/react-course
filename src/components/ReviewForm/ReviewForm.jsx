@@ -1,6 +1,6 @@
 import { useReviewForm } from "./useReviewForm";
-import { Counter } from "../Counter/Counter";
-
+import Counter from "../Counter/Counter";
+import Button from "../Button/Button";
 import styles from "./ReviewForm.module.css";
 
 const ReviewForm = () => {
@@ -39,7 +39,7 @@ const ReviewForm = () => {
           onIncrement={handleIncrementRating}
           onDecrement={handleDecrementRating}
         />
-        <button onClick={handleClear}>Clear</button>
+        <Button onClick={handleClear}>Очистить</Button>
       </div>
     </div>
   );

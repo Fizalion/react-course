@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 import Counter from "../Counter/Counter";
 import styles from "./Dish.module.css";
 
 const Dish = ({ dish }) => {
   const [count, setCount] = useState(0);
+  const { user } = useContext(UserContext);
 
   function onDecrement() {
     if (count === 0) return;
@@ -18,11 +20,13 @@ const Dish = ({ dish }) => {
   return (
     <div className={styles.dish}>
       <span className={styles.name}>{dish.name}</span>
-      <Counter
-        value={count}
-        onIncrement={onIncrement}
-        onDecrement={onDecrement}
-      />
+      {user && (
+        <Counter
+          value={count}
+          onIncrement={onIncrement}
+          onDecrement={onDecrement}
+        />
+      )}
     </div>
   );
 };

@@ -1,11 +1,14 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext/UserContext";
+import Dish from "../Dish/Dish";
 import Review from "../Review/Review";
 import ReviewForm from "../ReviewForm/ReviewForm";
-import Dish from "../Dish/Dish";
 
 const Restaurant = ({ restaurant }) => {
   const name = restaurant.name;
   const menu = restaurant.menu;
   const reviews = restaurant.reviews || [];
+  const { user } = useContext(UserContext);
 
   return (
     <section>
@@ -36,7 +39,7 @@ const Restaurant = ({ restaurant }) => {
           ))}
         </ul>
       )}
-      <ReviewForm />
+      {user && <ReviewForm />}
     </section>
   );
 };

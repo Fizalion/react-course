@@ -1,7 +1,10 @@
+import { useState } from "react";
+import ThemeProvider from "./contexts/ThemeContext/ThemeContext";
+import UserProvider from "./contexts/UserContext/UserContext";
 import { restaurants } from "./mock";
 import Restaurant from "./components/Restaurant/Restaurant";
 import Layout from "./components/Layout/Layout";
-import { useState } from "react";
+import Button from "./components/Button/Button";
 
 const App = () => {
   const [activeRestaurantId, setActiveRestaurantId] = useState(
@@ -17,20 +20,26 @@ const App = () => {
   }
 
   return (
-    <Layout>
-      <main>
-        {restaurants.map((restaurant) => (
-          <button
-            key={restaurant.id}
-            onClick={() => handleClick(restaurant.id)}
-          >
-            {restaurant.name}
-          </button>
-        ))}
+    <ThemeProvider>
+      <UserProvider>
+        <Layout>
+          <main>
+            <div className="tabs">
+              {restaurants.map((restaurant) => (
+                <Button
+                  key={restaurant.id}
+                  onClick={() => handleClick(restaurant.id)}
+                >
+                  {restaurant.name}
+                </Button>
+              ))}
+            </div>
 
-        <Restaurant restaurant={activeRestaurant} />
-      </main>
-    </Layout>
+            <Restaurant restaurant={activeRestaurant} />
+          </main>
+        </Layout>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 

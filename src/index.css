@@ -47,3 +47,9 @@ textarea {
   margin: 0 auto;
   padding: 20px;
 }
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
