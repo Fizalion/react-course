@@ -1,0 +1,9 @@
+.dark {
+  background: #3a2f2a;
+  color: #f5e6d3;
+  border-color: #5a463d;
+}
+
+.dark:hover {
+  background: #4a3a32;
+}
