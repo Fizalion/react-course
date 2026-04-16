@@ -1,26 +1,28 @@
-import { useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { selectDishById } from "../../redux/entities/dishes/dishesSlice";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext/UserContext";
 import { selectDishCountById } from "../../redux/cart/cartSlice";
 import { increment, decrement } from "../../redux/cart/cartSlice";
-import { UserContext } from "../../contexts/UserContext/UserContext";
-import Counter from "../Counter/Counter";
-import styles from "./Dish.module.css";
+import Counter from "../../components/Counter/Counter";
+import styles from "../../components/Dish/Dish.module.css";
 
-const Dish = ({ dishId }) => {
+const DishPage = () => {
+  const { dishId } = useParams();
   const dish = useSelector((state) => selectDishById(state, dishId));
   const count = useSelector((state) => selectDishCountById(state, dishId));
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
 
-  if (!dish) return null;
+  if (!dish) return <div>Блюдо не найдено</div>;
   const { name } = dish;
   const onDecrement = () => dispatch(decrement(dishId));
   const onIncrement = () => dispatch(increment(dishId));
 
   return (
-    <div className={styles.dish}>
-      <span className={styles.name}>{name}</span>
+    <section className={styles.dish}>
+      <h2 className={styles.name}>{name}</h2>
       {user && (
         <Counter
           value={count}
@@ -28,8 +30,8 @@ const Dish = ({ dishId }) => {
           onDecrement={onDecrement}
         />
       )}
-    </div>
+    </section>
   );
 };
 
-export default Dish;
+export default DishPage;

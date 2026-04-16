@@ -3,7 +3,9 @@ import { ThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import ScrollProgress from "../ScrollProgress/ScrollProgress";
 import Button from "../Button/Button";
+import Cart from "../Cart/Cart";
 import styles from "./Layout.module.css";
+import { Link } from "react-router-dom";
 
 const Layout = ({ children }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -14,7 +16,7 @@ const Layout = ({ children }) => {
       <ScrollProgress />
       <div className={theme === "dark" ? "container dark" : "container"}>
         <header className={styles.header}>
-          <div>Рестораны</div>
+          <Link to="/restaurants">Рестораны</Link>
           <div className={styles.headerRight}>
             {user ? (
               <>
@@ -30,6 +32,7 @@ const Layout = ({ children }) => {
 
         {children}
 
+        <Cart />
         <footer>Footer</footer>
       </div>
     </main>

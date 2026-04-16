@@ -1,26 +1,40 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { selectRestaurantById } from "../../redux/entities/restaurants/restaurantsSlice";
+import { selectDishesByRestaurantId } from "../../redux/selectors";
+import { selectReviewsByRestaurantId } from "../../redux/selectors";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import Dish from "../Dish/Dish";
 import Review from "../Review/Review";
 import ReviewForm from "../ReviewForm/ReviewForm";
 
-const Restaurant = ({ restaurant }) => {
-  const name = restaurant.name;
-  const menu = restaurant.menu;
-  const reviews = restaurant.reviews || [];
+const Restaurant = ({ restaurantId }) => {
+  const restaurant = useSelector((state) =>
+    selectRestaurantById(state, restaurantId),
+  );
+  const dishes = useSelector((state) =>
+    selectDishesByRestaurantId(state, restaurantId),
+  );
+  const reviews = useSelector((state) =>
+    selectReviewsByRestaurantId(state, restaurantId),
+  );
   const { user } = useContext(UserContext);
+
+  if (!restaurant) return null;
+
+  const { name } = restaurant;
 
   return (
     <section>
       <h2>{name}</h2>
 
-      {menu?.length > 0 && (
+      {dishes?.length > 0 && (
         <>
           <h3>Меню</h3>
           <ul>
-            {menu.map((dish) => (
+            {dishes.map((dish) => (
               <li key={dish.id}>
-                <Dish dish={dish} />
+                <Dish dishId={dish.id} />
               </li>
             ))}
           </ul>
@@ -34,7 +48,7 @@ const Restaurant = ({ restaurant }) => {
         <ul>
           {reviews.map((review) => (
             <li key={review.id}>
-              <Review review={review} />
+              <Review reviewId={review.id} />
             </li>
           ))}
         </ul>
