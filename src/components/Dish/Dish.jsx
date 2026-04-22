@@ -1,22 +1,18 @@
 import { useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectDishById } from "../../redux/entities/dishes/dishesSlice";
-import { selectDishCountById } from "../../redux/cart/cartSlice";
-import { increment, decrement } from "../../redux/cart/cartSlice";
 import { UserContext } from "../../contexts/UserContext/UserContext";
 import Counter from "../Counter/Counter";
 import styles from "./Dish.module.css";
+import useDishCounter from "./useDishCounter";
 
 const Dish = ({ dishId }) => {
   const dish = useSelector((state) => selectDishById(state, dishId));
-  const count = useSelector((state) => selectDishCountById(state, dishId));
-  const dispatch = useDispatch();
+  const { count, onIncrement, onDecrement } = useDishCounter(dishId);
   const { user } = useContext(UserContext);
 
   if (!dish) return null;
   const { name } = dish;
-  const onDecrement = () => dispatch(decrement(dishId));
-  const onIncrement = () => dispatch(increment(dishId));
 
   return (
     <div className={styles.dish}>

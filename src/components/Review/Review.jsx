@@ -5,11 +5,11 @@ import styles from "./Review.module.css";
 
 const Review = ({ reviewId }) => {
   const review = useSelector((state) => selectReviewById(state, reviewId));
+  const userId = review?.userId;
+  const user = useSelector((state) => selectUserById(state, userId));
 
   if (!review) return null;
-
-  const { userId, text, rating } = review;
-  const user = useSelector((state) => selectUserById(state, userId));
+  const { text, rating } = review;
   const name = user?.name;
 
   return (

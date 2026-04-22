@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ThemeProvider from "./contexts/ThemeContext/ThemeContext";
 import UserProvider from "./contexts/UserContext/UserContext";
 import Layout from "./components/Layout/Layout";
@@ -7,11 +7,11 @@ import MenuPage from "./pages/MenuPage/MenuPage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 import DishPage from "./pages/DishPage/DishPage";
 
-const App = () => {
-  const HomePage = () => {
-    return <div>HomePage</div>;
-  };
+const HomePage = () => {
+  return <div>HomePage</div>;
+};
 
+const App = () => {
   return (
     <ThemeProvider>
       <UserProvider>
