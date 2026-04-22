@@ -1,42 +1,37 @@
-import { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ThemeProvider from "./contexts/ThemeContext/ThemeContext";
 import UserProvider from "./contexts/UserContext/UserContext";
-import { restaurants } from "./mock";
-import Restaurant from "./components/Restaurant/Restaurant";
 import Layout from "./components/Layout/Layout";
-import Button from "./components/Button/Button";
+import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
+import MenuPage from "./pages/MenuPage/MenuPage";
+import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
+import DishPage from "./pages/DishPage/DishPage";
+
+const HomePage = () => {
+  return <div>HomePage</div>;
+};
 
 const App = () => {
-  const [activeRestaurantId, setActiveRestaurantId] = useState(
-    restaurants[0].id,
-  );
-  const activeRestaurant = restaurants.find(
-    (restaurant) => restaurant.id === activeRestaurantId,
-  );
-
-  function handleClick(id) {
-    if (id === activeRestaurantId) return;
-    setActiveRestaurantId(id);
-  }
-
   return (
     <ThemeProvider>
       <UserProvider>
         <Layout>
-          <main>
-            <div className="tabs">
-              {restaurants.map((restaurant) => (
-                <Button
-                  key={restaurant.id}
-                  onClick={() => handleClick(restaurant.id)}
-                >
-                  {restaurant.name}
-                </Button>
-              ))}
-            </div>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-            <Restaurant restaurant={activeRestaurant} />
-          </main>
+            <Route path="/restaurants" element={<RestaurantsPage />} />
+
+            <Route
+              path="/restaurants/:restaurantId"
+              element={<RestaurantsPage />}
+            >
+              <Route index element={<Navigate to="menu" replace />} />
+              <Route path="menu" element={<MenuPage />} />
+              <Route path="reviews" element={<ReviewsPage />} />
+            </Route>
+
+            <Route path="/dish/:dishId" element={<DishPage />} />
+          </Routes>
         </Layout>
       </UserProvider>
     </ThemeProvider>

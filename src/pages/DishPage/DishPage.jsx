@@ -1,22 +1,24 @@
-import { useContext } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { selectDishById } from "../../redux/entities/dishes/dishesSlice";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext/UserContext";
-import Counter from "../Counter/Counter";
-import styles from "./Dish.module.css";
-import useDishCounter from "./useDishCounter";
+import Counter from "../../components/Counter/Counter";
+import styles from "../../components/Dish/Dish.module.css";
+import useDishCounter from "../../components/Dish/useDishCounter";
 
-const Dish = ({ dishId }) => {
+const DishPage = () => {
+  const { dishId } = useParams();
   const dish = useSelector((state) => selectDishById(state, dishId));
   const { count, onIncrement, onDecrement } = useDishCounter(dishId);
   const { user } = useContext(UserContext);
 
-  if (!dish) return null;
+  if (!dish) return <div>Блюдо не найдено</div>;
   const { name } = dish;
 
   return (
-    <div className={styles.dish}>
-      <span className={styles.name}>{name}</span>
+    <section className={styles.dish}>
+      <h2 className={styles.name}>{name}</h2>
       {user && (
         <Counter
           value={count}
@@ -24,8 +26,8 @@ const Dish = ({ dishId }) => {
           onDecrement={onDecrement}
         />
       )}
-    </div>
+    </section>
   );
 };
 
-export default Dish;
+export default DishPage;
