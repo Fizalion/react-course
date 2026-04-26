@@ -1,15 +1,12 @@
 import { useReducer } from "react";
 
 const initialState = {
-  name: "",
   text: "",
   rating: 1,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "SET_NAME":
-      return { ...state, name: action.payload };
     case "SET_TEXT":
       return { ...state, text: action.payload };
     case "SET_RATING":
@@ -23,13 +20,6 @@ function reducer(state, action) {
 
 export const useReviewForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  function handleNameChange(e) {
-    dispatch({
-      type: "SET_NAME",
-      payload: e.target.value,
-    });
-  }
 
   function handleTextChange(e) {
     dispatch({
@@ -64,7 +54,6 @@ export const useReviewForm = () => {
 
   return {
     state,
-    handleNameChange,
     handleTextChange,
     handleIncrementRating,
     handleDecrementRating,

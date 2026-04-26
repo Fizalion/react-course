@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { selectDishById } from "../../redux/entities/dishes/dishesSlice";
-import { UserContext } from "../../contexts/UserContext/UserContext";
+import { UserContext } from "../../contexts/UserContext/context";
 import Counter from "../Counter/Counter";
 import styles from "./Dish.module.css";
 import useDishCounter from "./useDishCounter";
