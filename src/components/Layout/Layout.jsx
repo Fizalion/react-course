@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext/ThemeContext";
-import { UserContext } from "../../contexts/UserContext/UserContext";
+import { ThemeContext } from "../../contexts/ThemeContext/context";
+import { UserContext } from "../../contexts/UserContext/context";
 import ScrollProgress from "../ScrollProgress/ScrollProgress";
 import Button from "../Button/Button";
 import Cart from "../Cart/Cart";

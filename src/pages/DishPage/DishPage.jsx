@@ -1,19 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectDishById } from "../../redux/entities/dishes/dishesSlice";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext/UserContext";
+import {
+  loadDishById,
+  selectDishById,
+} from "../../redux/entities/dishes/dishesSlice";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/UserContext/context";
 import Counter from "../../components/Counter/Counter";
 import styles from "../../components/Dish/Dish.module.css";
 import useDishCounter from "../../components/Dish/useDishCounter";
 
 const DishPage = () => {
+  const dispatch = useDispatch();
   const { dishId } = useParams();
   const dish = useSelector((state) => selectDishById(state, dishId));
   const { count, onIncrement, onDecrement } = useDishCounter(dishId);
   const { user } = useContext(UserContext);
 
-  if (!dish) return <div>Блюдо не найдено</div>;
+  useEffect(() => {
+    if (dishId && !dish) dispatch(loadDishById(dishId));
+  }, [dishId, dish, dispatch]);
+
+  if (!dish) return <div>Загрузка блюда...</div>;
   const { name } = dish;
 
   return (
